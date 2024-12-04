@@ -19,6 +19,8 @@ import org.ton.java.tlb.types.VmStackValueInt;
 import org.ton.java.tlb.types.VmStackValueTinyInt;
 import org.ton.java.utils.Utils;
 
+import java.io.*;
+
 @Slf4j
 @Builder
 @Getter
@@ -262,6 +264,7 @@ public class TvmEmulator {
         tvmEmulatorI.tvm_emulator_run_get_method(
             tvmEmulator, Utils.calculateMethodId(methodName), stackBoc);
     Utils.enableNativeOutput();
+    System.out.println(result);
     Gson gson = new GsonBuilder().setObjectToNumberStrategy(ToNumberPolicy.BIG_DECIMAL).create();
     return gson.fromJson(result, GetMethodResult.class);
   }
