@@ -269,6 +269,15 @@ public class TvmEmulator {
     return gson.fromJson(result, GetMethodResult.class);
   }
 
+  public String runGetMethodStr(String methodName, String stackBoc) {
+    Utils.disableNativeOutput();
+    String result =
+        tvmEmulatorI.tvm_emulator_run_get_method(
+            tvmEmulator, Utils.calculateMethodId(methodName), stackBoc);
+    Utils.enableNativeOutput();
+    return result;
+  }
+
   public BigInteger runGetSeqNo() {
     GetMethodResult methodResult = runGetMethod(Utils.calculateMethodId("seqno"));
     if (methodResult.getVm_exit_code() != 0) {
